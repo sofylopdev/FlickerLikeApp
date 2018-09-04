@@ -15,6 +15,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import edu.galileo.android.flickerapp.FlickerLikeApp;
 import edu.galileo.android.flickerapp.R;
 import edu.galileo.android.flickerapp.api.FlickerClient;
 import edu.galileo.android.flickerapp.entities.Picture;
@@ -28,6 +29,7 @@ import edu.galileo.android.flickerapp.searchresults.SearchResultsPresenter;
 import edu.galileo.android.flickerapp.searchresults.SearchResultsPresenterImpl;
 import edu.galileo.android.flickerapp.searchresults.SearchResultsRepository;
 import edu.galileo.android.flickerapp.searchresults.SearchResultsRepositoryImpl;
+import edu.galileo.android.flickerapp.searchresults.di.SearchActivityComponent;
 
 import static edu.galileo.android.flickerapp.main.ui.MainActivity.TAGS_EXTRA;
 
@@ -41,6 +43,7 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
     TextView pictureTitle;
 
     private SearchResultsPresenter presenter;
+    private SearchActivityComponent component;
     private ImageLoader imageLoader;
 
     @Override
@@ -58,11 +61,10 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
     }
 
     private void setupInjection() {
-        MyEventBus eventBus = new MyEventBus(EventBus.getDefault());
-        SearchResultsRepositoryImpl repository = new SearchResultsRepositoryImpl(eventBus, new FlickerClient().getFlickrService());
-        presenter = new SearchResultsPresenterImpl(eventBus, this, new SavePictureInteractorImpl(repository), new GetNextPictureInteractorImpl(repository), new LoadPicturesInteractorImpl(repository) {
-        });
-        imageLoader = new ImageLoader(Glide.with(this));
+        FlickerLikeApp app = (FlickerLikeApp) getApplication();
+        component = app.getSearchActivityComponent(this, this);
+        presenter = getPresenter();
+        imageLoader = getImageLoader();
     }
 
     @Override
@@ -118,5 +120,13 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
     @Override
     public void onPictureError(String error) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    }
+
+    public ImageLoader getImageLoader() {
+        return component.getImageLoader();
+    }
+
+    public SearchResultsPresenter getPresenter() {
+        return component.getPresenter();
     }
 }

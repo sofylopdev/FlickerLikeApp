@@ -36,7 +36,6 @@ public class SearchResultsRepositoryImpl implements SearchResultsRepository {
         call.enqueue(new Callback<PhotosResponse>() {
             @Override
             public void onResponse(Call<PhotosResponse> call, Response<PhotosResponse> response) {
-                Log.d("Repository", "Got response");
                 if (response.isSuccessful()) {
 
                     PhotosResponse photosResponse = response.body();

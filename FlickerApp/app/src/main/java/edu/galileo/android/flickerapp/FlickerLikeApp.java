@@ -10,6 +10,11 @@ import edu.galileo.android.flickerapp.main.di.MainActivityComponent;
 import edu.galileo.android.flickerapp.main.di.MainActivityModule;
 import edu.galileo.android.flickerapp.main.ui.MainActivity;
 import edu.galileo.android.flickerapp.main.ui.MainView;
+import edu.galileo.android.flickerapp.searchresults.di.DaggerSearchActivityComponent;
+import edu.galileo.android.flickerapp.searchresults.di.SearchActivityComponent;
+import edu.galileo.android.flickerapp.searchresults.di.SearchActivityModule;
+import edu.galileo.android.flickerapp.searchresults.ui.SearchResultsActivity;
+import edu.galileo.android.flickerapp.searchresults.ui.SearchResultsView;
 
 public class FlickerLikeApp extends Application {
 
@@ -37,6 +42,13 @@ public class FlickerLikeApp extends Application {
         return DaggerMainActivityComponent.builder()
                 .libsModule(new LibsModule(activity))
                 .mainActivityModule(new MainActivityModule(view))
+                .build();
+    }
+
+    public SearchActivityComponent getSearchActivityComponent(SearchResultsActivity activity, SearchResultsView view){
+        return DaggerSearchActivityComponent.builder()
+                .libsModule(new LibsModule(activity))
+                .searchActivityModule(new SearchActivityModule(view))
                 .build();
     }
 }
