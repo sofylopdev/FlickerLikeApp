@@ -3,6 +3,8 @@ package edu.galileo.android.flickerapp.searchresults.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -33,12 +35,12 @@ import edu.galileo.android.flickerapp.searchresults.di.SearchActivityComponent;
 
 import static edu.galileo.android.flickerapp.main.ui.MainActivity.TAGS_EXTRA;
 
-public class SearchResultsActivity extends AppCompatActivity implements SearchResultsView {
+public class SearchResultsActivity extends AppCompatActivity implements SearchResultsView, SwipeGestureListener {
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     @BindView(R.id.picture)
-    ImageView picture;
+    ImageView pictureView;
     @BindView(R.id.pictureTitle)
     TextView pictureTitle;
 
@@ -46,18 +48,33 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
     private SearchActivityComponent component;
     private ImageLoader imageLoader;
 
+    private Picture picture;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searched_results);
         ButterKnife.bind(this);
         setupInjection();
+        setupGestureDetector();
         presenter.onCreate();
 
         Intent intent = getIntent();
         if(intent.getStringExtra(TAGS_EXTRA) != null) {
             presenter.loadImages(intent.getStringExtra(TAGS_EXTRA));
         }
+    }
+
+    private void setupGestureDetector() {
+        final GestureDetector gestureDetector = new GestureDetector(this, new SwipeGestureDetector(this));
+        View.OnTouchListener gestureOnTouchListener = new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //This way we are connecting the events
+                return gestureDetector.onTouchEvent(event);
+            }
+        };
+        pictureView.setOnTouchListener(gestureOnTouchListener);
     }
 
     private void setupInjection() {
@@ -85,13 +102,13 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
 
     @Override
     public void showUIElements() {
-        picture.setVisibility(View.VISIBLE);
+        pictureView.setVisibility(View.VISIBLE);
         pictureTitle.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hidUIElements() {
-        picture.setVisibility(View.GONE);
+        pictureView.setVisibility(View.GONE);
         pictureTitle.setVisibility(View.GONE);
     }
 
@@ -113,7 +130,8 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
 
     @Override
     public void setPictureAndTitle(Picture picture) {
-        imageLoader.load(this.picture, picture.getImageURL());
+        this.picture = picture;
+        imageLoader.load(pictureView, picture.getImageURL());
         pictureTitle.setText(String.format("Title: %s", picture.getTitle()));
     }
 
@@ -128,5 +146,15 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
 
     public SearchResultsPresenter getPresenter() {
         return component.getPresenter();
+    }
+
+    @Override
+    public void onSave() {
+        presenter.saveImage(picture);
+    }
+
+    @Override
+    public void onDismiss() {
+presenter.getNextImage();
     }
 }
