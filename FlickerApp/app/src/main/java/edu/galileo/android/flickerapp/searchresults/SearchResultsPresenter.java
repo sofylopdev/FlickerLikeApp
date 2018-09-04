@@ -17,6 +17,8 @@ public interface SearchResultsPresenter {
     void imageError(String error);
     void imageReady();
 
+    void loadImages(String tags);
+
 
     SearchResultsView getView();
 }

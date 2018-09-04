@@ -14,12 +14,19 @@ public class SearchResultsPresenterImpl implements SearchResultsPresenter {
 
     private SavePictureInteractor savePictureInteractor;
     private GetNextPictureInteractor getNextPictureInteractor;
+    private LoadPicturesInteractor loadPicturesInteractor;
 
-    public SearchResultsPresenterImpl(MyEventBus eventBus, SearchResultsView view, SavePictureInteractor savePictureInteractor, GetNextPictureInteractor getNextPictureInteractor) {
+    public SearchResultsPresenterImpl(
+            MyEventBus eventBus,
+            SearchResultsView view,
+            SavePictureInteractor savePictureInteractor,
+            GetNextPictureInteractor getNextPictureInteractor,
+            LoadPicturesInteractor loadPicturesInteractor) {
         this.eventBus = eventBus;
         this.view = view;
         this.savePictureInteractor = savePictureInteractor;
         this.getNextPictureInteractor = getNextPictureInteractor;
+        this.loadPicturesInteractor = loadPicturesInteractor;
     }
 
 
@@ -71,7 +78,9 @@ public class SearchResultsPresenterImpl implements SearchResultsPresenter {
                     getNextPictureInteractor.executeGetNext();
                     break;
                 case SearchResultsEvent.GET_NEXT_EVENT:
-                   view.setPictureAndTitle(event.getPicture());
+                    view.showUIElements();
+                    view.hideProgress();
+                    view.setPictureAndTitle(event.getPicture());
                     break;
                 case SearchResultsEvent.ERROR_EVENT:
                     imageError(event.getErrorMsg());
@@ -94,6 +103,15 @@ public class SearchResultsPresenterImpl implements SearchResultsPresenter {
             view.hideProgress();
             view.showUIElements();
         }
+    }
+
+    @Override
+    public void loadImages(String tags) {
+        if (view != null) {
+            view.hidUIElements();
+            view.showProgress();
+        }
+        loadPicturesInteractor.executeLoading(tags);
     }
 
     @Override
