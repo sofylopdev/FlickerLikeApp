@@ -23,6 +23,16 @@ public class FlickerLikeApp extends Application {
         FlowManager.init(this);
     }
 
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        DBTearDown();
+    }
+
+    private void DBTearDown() {
+        FlowManager.destroy();
+    }
+
     public MainActivityComponent getMainComponent(MainActivity activity, MainView view) {
         return DaggerMainActivityComponent.builder()
                 .libsModule(new LibsModule(activity))

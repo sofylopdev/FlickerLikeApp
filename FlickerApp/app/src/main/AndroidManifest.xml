@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".likedphotos.LikedPhotosActivity" />
-        <activity android:name=".searchresults.SearchResultsActivity"></activity>
+        <activity android:name=".searchresults.ui.SearchResultsActivity"></activity>
     </application>
 
 </manifest>

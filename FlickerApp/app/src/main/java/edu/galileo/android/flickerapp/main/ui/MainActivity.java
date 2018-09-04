@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
     private MainPresenter presenter;
     private MainActivityComponent component;
 
+    public static final String TAGS_EXTRA = "tagToSearch";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void onNotEmptySearchString(String tags) {
         Intent intent = new Intent(this, SearchResultsActivity.class);
-        intent.putExtra("tagToSearch", tags);
+        intent.putExtra(TAGS_EXTRA, tags);
         startActivity(intent);
     }
 

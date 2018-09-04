@@ -17,7 +17,6 @@ public class FlickerClient {
     private Retrofit retrofit;
     public static final String BASE_URL = "https://api.flickr.com";
 
-    //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
 
     public FlickerClient(){
 
