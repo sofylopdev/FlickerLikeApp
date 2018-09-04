@@ -14,9 +14,9 @@ import butterknife.OnClick;
 import edu.galileo.android.flickerapp.FlickerLikeApp;
 import edu.galileo.android.flickerapp.likedphotos.LikedPhotosActivity;
 import edu.galileo.android.flickerapp.R;
-import edu.galileo.android.flickerapp.searchresults.SearchResultsActivity;
 import edu.galileo.android.flickerapp.main.MainPresenter;
 import edu.galileo.android.flickerapp.main.di.MainActivityComponent;
+import edu.galileo.android.flickerapp.searchresults.ui.SearchResultsActivity;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
