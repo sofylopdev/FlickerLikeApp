@@ -5,6 +5,12 @@ import android.app.Application;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
 import edu.galileo.android.flickerapp.libs.di.LibsModule;
+import edu.galileo.android.flickerapp.likedphotos.di.DaggerLikedPicturesComponent;
+import edu.galileo.android.flickerapp.likedphotos.di.LikedPicturesComponent;
+import edu.galileo.android.flickerapp.likedphotos.di.LikedPicturesModule;
+import edu.galileo.android.flickerapp.likedphotos.ui.LikedPhotosActivity;
+import edu.galileo.android.flickerapp.likedphotos.ui.LikedPhotosView;
+import edu.galileo.android.flickerapp.likedphotos.ui.adapters.PictureClickListener;
 import edu.galileo.android.flickerapp.main.di.DaggerMainActivityComponent;
 import edu.galileo.android.flickerapp.main.di.MainActivityComponent;
 import edu.galileo.android.flickerapp.main.di.MainActivityModule;
@@ -51,4 +57,12 @@ public class FlickerLikeApp extends Application {
                 .searchActivityModule(new SearchActivityModule(view))
                 .build();
     }
+
+    public LikedPicturesComponent getLikedPicturesComponent(LikedPhotosActivity activity, LikedPhotosView view, PictureClickListener listener){
+        return DaggerLikedPicturesComponent.builder()
+                .libsModule(new LibsModule(activity))
+                .likedPicturesModule(new LikedPicturesModule(view, listener))
+                .build();
+    }
+
 }
