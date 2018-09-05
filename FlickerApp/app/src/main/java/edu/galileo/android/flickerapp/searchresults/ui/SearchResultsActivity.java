@@ -11,26 +11,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-
-import org.greenrobot.eventbus.EventBus;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.galileo.android.flickerapp.FlickerLikeApp;
 import edu.galileo.android.flickerapp.R;
-import edu.galileo.android.flickerapp.api.FlickerClient;
 import edu.galileo.android.flickerapp.entities.Picture;
 import edu.galileo.android.flickerapp.libs.ImageLoader;
-import edu.galileo.android.flickerapp.libs.MyEventBus;
-import edu.galileo.android.flickerapp.searchresults.GetNextPictureInteractor;
-import edu.galileo.android.flickerapp.searchresults.GetNextPictureInteractorImpl;
-import edu.galileo.android.flickerapp.searchresults.LoadPicturesInteractorImpl;
-import edu.galileo.android.flickerapp.searchresults.SavePictureInteractorImpl;
 import edu.galileo.android.flickerapp.searchresults.SearchResultsPresenter;
-import edu.galileo.android.flickerapp.searchresults.SearchResultsPresenterImpl;
-import edu.galileo.android.flickerapp.searchresults.SearchResultsRepository;
-import edu.galileo.android.flickerapp.searchresults.SearchResultsRepositoryImpl;
 import edu.galileo.android.flickerapp.searchresults.di.SearchActivityComponent;
 
 import static edu.galileo.android.flickerapp.main.ui.MainActivity.TAGS_EXTRA;
@@ -60,7 +47,7 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
         presenter.onCreate();
 
         Intent intent = getIntent();
-        if(intent.getStringExtra(TAGS_EXTRA) != null) {
+        if (intent.getStringExtra(TAGS_EXTRA) != null) {
             presenter.loadImages(intent.getStringExtra(TAGS_EXTRA));
         }
     }
@@ -155,6 +142,6 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
 
     @Override
     public void onDismiss() {
-presenter.getNextImage();
+        presenter.getNextImage();
     }
 }

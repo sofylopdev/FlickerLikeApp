@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".likedphotos.LikedPhotosActivity" />
+        <activity android:name=".likedphotos.ui.LikedPhotosActivity" />
         <activity android:name=".searchresults.ui.SearchResultsActivity"></activity>
     </application>
 

@@ -33,6 +33,7 @@ ext {
     eventbusVersion = '3.0.0'
     daggerVersion = '2.16'
     dbflowVersion = "4.2.4"
+    supportLibraryVersion = "27.1.1"
 
     jsr250Version = '1.0'
 }

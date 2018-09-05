@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.galileo.android.flickerapp.FlickerLikeApp;
-import edu.galileo.android.flickerapp.likedphotos.LikedPhotosActivity;
+import edu.galileo.android.flickerapp.likedphotos.ui.LikedPhotosActivity;
 import edu.galileo.android.flickerapp.R;
 import edu.galileo.android.flickerapp.main.MainPresenter;
 import edu.galileo.android.flickerapp.main.di.MainActivityComponent;

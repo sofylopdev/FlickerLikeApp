@@ -1,4 +1,4 @@
-package edu.galileo.android.flickerapp.likedphotos;
+package edu.galileo.android.flickerapp.likedphotos.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
