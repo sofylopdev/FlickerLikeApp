@@ -73,7 +73,13 @@ public class SearchResultsRepositoryImpl implements SearchResultsRepository {
     @Override
     public void getNextPicture() {
         pictureList.remove(0);
+        if(pictureList.size() != 0)
         post(pictureList.get(0), null, SearchResultsEvent.GET_NEXT_EVENT);
+        else{
+            String noMorePictures = "No more photos to show!";
+            post(null, noMorePictures, SearchResultsEvent.NO_MORE_PICS_EVENT);
+        }
+
     }
 
     @Override

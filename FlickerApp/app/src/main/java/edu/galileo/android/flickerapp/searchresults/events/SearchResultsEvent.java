@@ -11,6 +11,7 @@ public class SearchResultsEvent {
     public static final int SAVE_EVENT = 0;
     public static final int GET_NEXT_EVENT = 1;
     public static final int ERROR_EVENT = 2;
+    public static final int NO_MORE_PICS_EVENT = 3;
 
 
     public int getType() {

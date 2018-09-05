@@ -42,14 +42,6 @@ public class SearchResultsPresenterImpl implements SearchResultsPresenter {
     }
 
     @Override
-    public void dismissImage() {
-        if (view != null) {
-            view.dismissAnimation();
-        }
-        getNextImage();
-    }
-
-    @Override
     public void getNextImage() {
         if (view != null) {
             view.hidUIElements();
@@ -61,7 +53,6 @@ public class SearchResultsPresenterImpl implements SearchResultsPresenter {
     @Override
     public void saveImage(Picture picture) {
         if (view != null) {
-            view.saveAnimation();
             view.hidUIElements();
             view.showProgress();
         }
@@ -85,6 +76,9 @@ public class SearchResultsPresenterImpl implements SearchResultsPresenter {
                 case SearchResultsEvent.ERROR_EVENT:
                     imageError(event.getErrorMsg());
                     break;
+                case SearchResultsEvent.NO_MORE_PICS_EVENT:
+                    view.noMorePictures(event.getErrorMsg());
+                    break;
             }
         }
     }
@@ -94,14 +88,6 @@ public class SearchResultsPresenterImpl implements SearchResultsPresenter {
         if (view != null) {
             view.hideProgress();
             view.onPictureError(error);
-        }
-    }
-
-    @Override
-    public void imageReady() {
-        if (view != null) {
-            view.hideProgress();
-            view.showUIElements();
         }
     }
 

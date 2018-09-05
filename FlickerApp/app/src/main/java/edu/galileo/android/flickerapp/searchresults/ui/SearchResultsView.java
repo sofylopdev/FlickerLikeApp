@@ -9,11 +9,9 @@ public interface SearchResultsView {
     void showUIElements();
     void hidUIElements();
 
-    void saveAnimation();
-    void dismissAnimation();
-
     void onPictureSaved();
 
     void setPictureAndTitle(Picture picture);
     void onPictureError(String error);
+    void noMorePictures(String message);
 }

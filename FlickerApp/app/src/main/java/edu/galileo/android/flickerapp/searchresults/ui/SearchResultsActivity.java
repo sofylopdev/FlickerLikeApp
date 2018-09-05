@@ -99,15 +99,7 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
         pictureTitle.setVisibility(View.GONE);
     }
 
-    @Override
-    public void saveAnimation() {
 
-    }
-
-    @Override
-    public void dismissAnimation() {
-
-    }
 
     @Override
     public void onPictureSaved() {
@@ -125,6 +117,12 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
     @Override
     public void onPictureError(String error) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void noMorePictures(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     public ImageLoader getImageLoader() {
