@@ -13,5 +13,4 @@ import edu.galileo.android.flickerapp.likedphotos.ui.adapters.LikedPicturesAdapt
 public interface LikedPicturesComponent {
     LikedPhotosPresenter getPresenter();
     LikedPicturesAdapter getAdapter();
-    ImageLoader getImageLoader();
 }

@@ -2,6 +2,7 @@ package edu.galileo.android.flickerapp.likedphotos.ui.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,8 @@ public class LikedPicturesAdapter extends RecyclerView.Adapter<LikedPicturesAdap
 
     @Override
     public void onBindViewHolder(@NonNull LikedPicturesViewHolder holder, int position) {
-        imageLoader.load(holder.image, pictureList.get(position).getImageURL());
+        String imgUrl = pictureList.get(position).getImageURL();
+        imageLoader.load(holder.image, imgUrl);
     }
 
     @Override
@@ -53,11 +55,11 @@ public class LikedPicturesAdapter extends RecyclerView.Adapter<LikedPicturesAdap
     }
 
     public class LikedPicturesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.image)
         ImageView image;
 
         public LikedPicturesViewHolder(View itemView) {
             super(itemView);
+            image = itemView.findViewById(R.id.image);
             itemView.setOnClickListener(this);
         }
 
