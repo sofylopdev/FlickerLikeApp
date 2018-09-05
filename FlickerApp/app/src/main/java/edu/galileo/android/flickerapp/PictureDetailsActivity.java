@@ -3,13 +3,10 @@ package edu.galileo.android.flickerapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +24,7 @@ public class PictureDetailsActivity extends AppCompatActivity {
 
     private Picture picture;
 
-   private ImageLoader imageLoader;
+    private ImageLoader imageLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +36,15 @@ public class PictureDetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         picture = (Picture) intent.getSerializableExtra(PICTURE_EXTRA);
+
         pictureTitle.setText(picture.getTitle());
-        Log.i("Testing", "title: " + picture.getTitle() + " url: " + picture.getImageURL());
-        if(imageLoader != null)
-        imageLoader.load(pictureView, picture.getImageURL());
+        if (imageLoader != null)
+            imageLoader.load(pictureView, picture.getImageURL());
     }
 
     private void setupInjection() {
         FlickerLikeApp app = (FlickerLikeApp) getApplication();
-       imageLoader =  app.getLibsComponent(this).getImageLoader();
+        imageLoader = app.getLibsComponent(this).getImageLoader();
     }
 
     @Override

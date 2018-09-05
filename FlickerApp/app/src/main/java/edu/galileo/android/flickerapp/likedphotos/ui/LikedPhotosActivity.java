@@ -73,7 +73,7 @@ public class LikedPhotosActivity extends AppCompatActivity implements LikedPhoto
 
     @Override
     public void emptyDB() {
-        String emptyDb = "You haven't liked any pictures yet.";
+        String emptyDb = getString(R.string.db_empty);
         Toast.makeText(this, emptyDb, Toast.LENGTH_SHORT).show();
     }
 

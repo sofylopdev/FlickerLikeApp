@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.galileo.android.flickerapp.R;
 import edu.galileo.android.flickerapp.api.FlickrService;
 import edu.galileo.android.flickerapp.api.entities.Photo;
 import edu.galileo.android.flickerapp.api.entities.PhotosResponse;
@@ -76,8 +77,7 @@ public class SearchResultsRepositoryImpl implements SearchResultsRepository {
         if(pictureList.size() != 0)
         post(pictureList.get(0), null, SearchResultsEvent.GET_NEXT_EVENT);
         else{
-            String noMorePictures = "No more photos to show!";
-            post(null, noMorePictures, SearchResultsEvent.NO_MORE_PICS_EVENT);
+            post(null, null, SearchResultsEvent.NO_MORE_PICS_EVENT);
         }
 
     }

@@ -4,4 +4,8 @@
     <string name="view_photos_button">View Liked Photos</string>
     <string name="label_search_tags">Enter tags separated with commas to search:</string>
     <string name="delete_picture">Delete Picture</string>
+    <string name="no_more_pictures">"No more photos to show!</string>
+    <string name="db_empty">You haven\'t liked any pictures yet.</string>
+    <string name="pic_saved">Picture saved.</string>
+    <string name="title">Title: %s</string>
 </resources>

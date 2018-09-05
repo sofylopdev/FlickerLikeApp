@@ -13,5 +13,5 @@ public interface SearchResultsView {
 
     void setPictureAndTitle(Picture picture);
     void onPictureError(String error);
-    void noMorePictures(String message);
+    void noMorePictures();
 }

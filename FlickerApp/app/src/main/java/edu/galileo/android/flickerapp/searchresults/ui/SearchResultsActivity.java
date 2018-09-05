@@ -103,7 +103,7 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
 
     @Override
     public void onPictureSaved() {
-        String savedTextToast = "Picture saved.";
+        String savedTextToast = getString(R.string.pic_saved);
         Toast.makeText(this, savedTextToast, Toast.LENGTH_SHORT).show();
     }
 
@@ -111,7 +111,7 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
     public void setPictureAndTitle(Picture picture) {
         this.picture = picture;
         imageLoader.load(pictureView, picture.getImageURL());
-        pictureTitle.setText(String.format("Title: %s", picture.getTitle()));
+        pictureTitle.setText(String.format(getString(R.string.title), picture.getTitle()));
     }
 
     @Override
@@ -120,8 +120,9 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
     }
 
     @Override
-    public void noMorePictures(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void noMorePictures() {
+        String noMorePictures = getString(R.string.no_more_pictures);
+        Toast.makeText(this, noMorePictures, Toast.LENGTH_SHORT).show();
         finish();
     }
 
