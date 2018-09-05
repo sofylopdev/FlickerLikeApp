@@ -42,6 +42,8 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searched_results);
         ButterKnife.bind(this);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupInjection();
         setupGestureDetector();
         presenter.onCreate();
@@ -98,8 +100,6 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
         pictureView.setVisibility(View.GONE);
         pictureTitle.setVisibility(View.GONE);
     }
-
-
 
     @Override
     public void onPictureSaved() {

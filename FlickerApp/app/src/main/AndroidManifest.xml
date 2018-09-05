@@ -19,8 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".likedphotos.ui.LikedPhotosActivity" />
-        <activity android:name=".searchresults.ui.SearchResultsActivity"></activity>
+        <activity android:name=".likedphotos.ui.LikedPhotosActivity"
+            android:parentActivityName=".main.ui.MainActivity"/>
+        <activity android:name=".searchresults.ui.SearchResultsActivity"
+            android:parentActivityName=".main.ui.MainActivity"/>
     </application>
 
 </manifest>

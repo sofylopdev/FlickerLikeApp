@@ -39,6 +39,8 @@ public class LikedPhotosActivity extends AppCompatActivity implements LikedPhoto
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liked_photos);
         ButterKnife.bind(this);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupInjection();
         setupRecycler();
         presenter.onCreate();
