@@ -1,11 +1,10 @@
 package edu.galileo.android.flickerapp.likedphotos.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -14,15 +13,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.galileo.android.flickerapp.FlickerLikeApp;
+import edu.galileo.android.flickerapp.PictureDetailsActivity;
 import edu.galileo.android.flickerapp.R;
 import edu.galileo.android.flickerapp.entities.Picture;
-import edu.galileo.android.flickerapp.libs.ImageLoader;
 import edu.galileo.android.flickerapp.likedphotos.LikedPhotosPresenter;
 import edu.galileo.android.flickerapp.likedphotos.di.LikedPicturesComponent;
 import edu.galileo.android.flickerapp.likedphotos.ui.adapters.LikedPicturesAdapter;
 import edu.galileo.android.flickerapp.likedphotos.ui.adapters.PictureClickListener;
 
 public class LikedPhotosActivity extends AppCompatActivity implements LikedPhotosView, PictureClickListener {
+
+    public static final String PICTURE_EXTRA = "extra_picture";
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
@@ -44,6 +45,11 @@ public class LikedPhotosActivity extends AppCompatActivity implements LikedPhoto
         setupInjection();
         setupRecycler();
         presenter.onCreate();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         presenter.getPictures();
     }
 
@@ -77,9 +83,10 @@ public class LikedPhotosActivity extends AppCompatActivity implements LikedPhoto
     }
 
     @Override
-    public void onPictureClick(View v, int position) {
-        String pictureClicked = "Clicked position: " + position;
-        Toast.makeText(this, pictureClicked, Toast.LENGTH_SHORT).show();
+    public void onPictureClick(Picture picture, int position) {
+        Intent intent = new Intent(this, PictureDetailsActivity.class);
+        intent.putExtra(PICTURE_EXTRA, picture);
+        startActivity(intent);
     }
 
 

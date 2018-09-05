@@ -65,7 +65,7 @@ public class LikedPicturesAdapter extends RecyclerView.Adapter<LikedPicturesAdap
 
         @Override
         public void onClick(View v) {
-            listener.onPictureClick(v, getAdapterPosition());
+            listener.onPictureClick(pictureList.get(getAdapterPosition()), getAdapterPosition());
         }
     }
 }

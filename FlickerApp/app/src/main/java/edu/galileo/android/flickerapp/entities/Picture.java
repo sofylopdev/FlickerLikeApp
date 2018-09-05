@@ -1,15 +1,16 @@
 package edu.galileo.android.flickerapp.entities;
 
-import com.google.gson.annotations.SerializedName;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.io.Serializable;
+
 import edu.galileo.android.flickerapp.database.PicturesDatabase;
 
 @Table(database = PicturesDatabase.class)
-public class Picture extends BaseModel{
+public class Picture extends BaseModel implements Serializable {
 
     @Column
     private String title;
@@ -33,4 +34,5 @@ public class Picture extends BaseModel{
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
+
 }

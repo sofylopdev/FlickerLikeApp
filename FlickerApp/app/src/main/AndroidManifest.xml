@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.galileo.android.flickerapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".FlickerLikeApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:name=".FlickerLikeApp"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -19,10 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".likedphotos.ui.LikedPhotosActivity"
-            android:parentActivityName=".main.ui.MainActivity"/>
-        <activity android:name=".searchresults.ui.SearchResultsActivity"
-            android:parentActivityName=".main.ui.MainActivity"/>
+        <activity
+            android:name=".likedphotos.ui.LikedPhotosActivity"
+            android:parentActivityName=".main.ui.MainActivity" />
+        <activity
+            android:name=".searchresults.ui.SearchResultsActivity"
+            android:parentActivityName=".main.ui.MainActivity" />
+        <activity android:name=".PictureDetailsActivity"
+            android:parentActivityName=".likedphotos.ui.LikedPhotosActivity"  />
     </application>
 
 </manifest>

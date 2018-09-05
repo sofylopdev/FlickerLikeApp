@@ -1,9 +1,13 @@
 package edu.galileo.android.flickerapp;
 
+import android.app.Activity;
 import android.app.Application;
+import android.support.v7.app.AppCompatActivity;
 
 import com.raizlabs.android.dbflow.config.FlowManager;
 
+import edu.galileo.android.flickerapp.libs.di.DaggerLibsComponent;
+import edu.galileo.android.flickerapp.libs.di.LibsComponent;
 import edu.galileo.android.flickerapp.libs.di.LibsModule;
 import edu.galileo.android.flickerapp.likedphotos.di.DaggerLikedPicturesComponent;
 import edu.galileo.android.flickerapp.likedphotos.di.LikedPicturesComponent;
@@ -62,6 +66,12 @@ public class FlickerLikeApp extends Application {
         return DaggerLikedPicturesComponent.builder()
                 .libsModule(new LibsModule(activity))
                 .likedPicturesModule(new LikedPicturesModule(view, listener))
+                .build();
+    }
+
+    public LibsComponent getLibsComponent(AppCompatActivity activity){
+        return DaggerLibsComponent.builder()
+                .libsModule(new LibsModule(activity))
                 .build();
     }
 
