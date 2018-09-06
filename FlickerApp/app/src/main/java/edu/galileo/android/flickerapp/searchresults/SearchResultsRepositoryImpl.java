@@ -1,7 +1,5 @@
 package edu.galileo.android.flickerapp.searchresults;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
