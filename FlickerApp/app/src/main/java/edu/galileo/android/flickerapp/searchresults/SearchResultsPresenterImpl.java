@@ -29,7 +29,6 @@ public class SearchResultsPresenterImpl implements SearchResultsPresenter {
         this.loadPicturesInteractor = loadPicturesInteractor;
     }
 
-
     @Override
     public void onCreate() {
         eventBus.register(this);
