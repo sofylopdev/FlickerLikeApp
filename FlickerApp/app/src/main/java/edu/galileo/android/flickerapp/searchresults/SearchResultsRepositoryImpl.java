@@ -53,9 +53,9 @@ public class SearchResultsRepositoryImpl implements SearchResultsRepository {
                                         photo.getId(),
                                         photo.getSecret());
                                 picture.setImageURL(pictureUrl);
-                                pictureList.add(picture);
+                                getPictureList().add(picture);
                             }
-                            post(pictureList.get(0), null, SearchResultsEvent.GET_NEXT_EVENT);
+                            post(getPictureList().get(0), null, SearchResultsEvent.GET_NEXT_EVENT);
                         } else {
                             post(null, null, SearchResultsEvent.NO_MORE_PICS_EVENT);
                         }
@@ -70,7 +70,6 @@ public class SearchResultsRepositoryImpl implements SearchResultsRepository {
             @Override
             public void onFailure(Call<PhotosResponse> call, Throwable t) {
                 post(null, t.getLocalizedMessage(), SearchResultsEvent.ERROR_EVENT);
-                Log.d("Repository", "3Message is: " + t.getLocalizedMessage());
             }
         });
     }
@@ -113,5 +112,13 @@ public class SearchResultsRepositoryImpl implements SearchResultsRepository {
         builder.append(".jpg");
 
         return builder.toString();
+    }
+
+    public List<Picture> getPictureList() {
+        return pictureList;
+    }
+
+    public void setPictureList(List<Picture> pictureList) {
+        this.pictureList = pictureList;
     }
 }
