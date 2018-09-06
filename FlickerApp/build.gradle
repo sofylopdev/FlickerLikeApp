@@ -36,4 +36,8 @@ ext {
     supportLibraryVersion = "27.1.1"
 
     jsr250Version = '1.0'
+
+    robolectricVersion = '3.8'
+    mockitoVersion = '1.10.19'
+    junitVersion = '4.12'
 }

@@ -48,4 +48,8 @@ public class MainPresenterImpl implements MainPresenter {
     public void search(String search) {
         interactor.execute(search);
     }
+
+    public MainView getView() {
+        return view;
+    }
 }
