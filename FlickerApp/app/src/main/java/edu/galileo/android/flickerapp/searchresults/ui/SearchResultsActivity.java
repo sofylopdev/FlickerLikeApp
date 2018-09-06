@@ -109,7 +109,7 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
 
     @Override
     public void setPictureAndTitle(Picture picture) {
-        this.picture = picture;
+        setPicture(picture);
         imageLoader.load(pictureView, picture.getImageURL());
         pictureTitle.setText(String.format(getString(R.string.title), picture.getTitle()));
     }
@@ -142,5 +142,13 @@ public class SearchResultsActivity extends AppCompatActivity implements SearchRe
     @Override
     public void onDismiss() {
         presenter.getNextImage();
+    }
+
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
     }
 }

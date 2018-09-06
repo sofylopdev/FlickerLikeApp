@@ -1,10 +1,14 @@
 package edu.galileo.android.flickerapp;
 
+import android.widget.Toast;
+
 import org.junit.Before;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowApplication;
+
+import java.util.List;
 
 public abstract class BaseTest {
 
@@ -18,5 +22,8 @@ public abstract class BaseTest {
         }
     }
 
-
+    protected List<Toast> getShadowToasts(){
+        ShadowApplication shadowApp = Shadows.shadowOf(RuntimeEnvironment.application);
+        return shadowApp.getShownToasts();
+    }
 }
