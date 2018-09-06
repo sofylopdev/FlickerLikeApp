@@ -5,7 +5,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.galileo.android.flickerapp.R;
 import edu.galileo.android.flickerapp.api.FlickrService;
 import edu.galileo.android.flickerapp.api.entities.Photo;
 import edu.galileo.android.flickerapp.api.entities.PhotosResponse;
@@ -37,8 +36,9 @@ public class SearchResultsRepositoryImpl implements SearchResultsRepository {
         call.enqueue(new Callback<PhotosResponse>() {
             @Override
             public void onResponse(Call<PhotosResponse> call, Response<PhotosResponse> response) {
-                if (response.isSuccessful()) {
+                String message = response.message();
 
+                if (response.isSuccessful()) {
                     PhotosResponse photosResponse = response.body();
                     if (photosResponse.getPhotos() != null) {
                         List<Photo> photoList = photosResponse.getPhotos().getPhoto();
@@ -55,18 +55,22 @@ public class SearchResultsRepositoryImpl implements SearchResultsRepository {
                                 picture.setImageURL(pictureUrl);
                                 pictureList.add(picture);
                             }
+                            post(pictureList.get(0), null, SearchResultsEvent.GET_NEXT_EVENT);
+                        } else {
+                            post(null, null, SearchResultsEvent.NO_MORE_PICS_EVENT);
                         }
+                    } else {
+                        post(null, message, SearchResultsEvent.ERROR_EVENT);
                     }
-
-                    post(pictureList.get(0), null, SearchResultsEvent.GET_NEXT_EVENT);
                 } else {
-                    post(null, response.message(), SearchResultsEvent.ERROR_EVENT);
+                    post(null, message, SearchResultsEvent.ERROR_EVENT);
                 }
             }
 
             @Override
             public void onFailure(Call<PhotosResponse> call, Throwable t) {
                 post(null, t.getLocalizedMessage(), SearchResultsEvent.ERROR_EVENT);
+                Log.d("Repository", "3Message is: " + t.getLocalizedMessage());
             }
         });
     }
@@ -74,9 +78,9 @@ public class SearchResultsRepositoryImpl implements SearchResultsRepository {
     @Override
     public void getNextPicture() {
         pictureList.remove(0);
-        if(pictureList.size() != 0)
-        post(pictureList.get(0), null, SearchResultsEvent.GET_NEXT_EVENT);
-        else{
+        if (pictureList.size() != 0)
+            post(pictureList.get(0), null, SearchResultsEvent.GET_NEXT_EVENT);
+        else {
             post(null, null, SearchResultsEvent.NO_MORE_PICS_EVENT);
         }
 

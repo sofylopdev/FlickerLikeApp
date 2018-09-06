@@ -77,7 +77,7 @@ public class SearchResultsPresenterImpl implements SearchResultsPresenter {
                     imageError(event.getErrorMsg());
                     break;
                 case SearchResultsEvent.NO_MORE_PICS_EVENT:
-                    view.noMorePictures(event.getErrorMsg());
+                    view.noMorePictures();
                     break;
             }
         }
