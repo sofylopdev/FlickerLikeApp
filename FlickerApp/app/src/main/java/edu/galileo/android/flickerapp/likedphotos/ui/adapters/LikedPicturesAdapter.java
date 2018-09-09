@@ -40,6 +40,7 @@ public class LikedPicturesAdapter extends RecyclerView.Adapter<LikedPicturesAdap
 
     @Override
     public void onBindViewHolder(@NonNull LikedPicturesViewHolder holder, int position) {
+        holder.setClickListener(listener, position);
         String imgUrl = pictureList.get(position).getImageURL();
         imageLoader.load(holder.image, imgUrl);
     }
@@ -54,18 +55,29 @@ public class LikedPicturesAdapter extends RecyclerView.Adapter<LikedPicturesAdap
         notifyDataSetChanged();
     }
 
-    public class LikedPicturesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class LikedPicturesViewHolder extends RecyclerView.ViewHolder{//} implements View.OnClickListener {
         ImageView image;
+        View view;
 
         public LikedPicturesViewHolder(View itemView) {
             super(itemView);
+            view = itemView;
             image = itemView.findViewById(R.id.image);
-            itemView.setOnClickListener(this);
+            //itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View v) {
-            listener.onPictureClick(pictureList.get(getAdapterPosition()), getAdapterPosition());
-        }
+//        @Override
+//        public void onClick(View v) {
+//            listener.onPictureClick(pictureList.get(getAdapterPosition()), getAdapterPosition());
+//        }
+
+       public void setClickListener(final PictureClickListener listener, final int position){
+          view.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  listener.onPictureClick(pictureList.get(position), position);
+              }
+          });
+       }
     }
 }

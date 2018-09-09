@@ -24,6 +24,7 @@ import edu.galileo.android.flickerapp.likedphotos.ui.adapters.PictureClickListen
 public class LikedPhotosActivity extends AppCompatActivity implements LikedPhotosView, PictureClickListener {
 
     public static final String PICTURE_EXTRA = "extra_picture";
+    public static final String TITLE_EXTRA = "extra_title";
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
@@ -85,7 +86,8 @@ public class LikedPhotosActivity extends AppCompatActivity implements LikedPhoto
     @Override
     public void onPictureClick(Picture picture, int position) {
         Intent intent = new Intent(this, PictureDetailsActivity.class);
-        intent.putExtra(PICTURE_EXTRA, picture);
+        intent.putExtra(PICTURE_EXTRA, picture.getImageURL());
+        intent.putExtra(TITLE_EXTRA, picture.getTitle());
         startActivity(intent);
     }
 
