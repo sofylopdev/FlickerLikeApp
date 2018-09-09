@@ -35,4 +35,13 @@ public class Picture extends BaseModel implements Serializable {
         this.imageURL = imageURL;
     }
 
+
+    public boolean equals(Object obj){
+        boolean equal = false;
+        if(obj instanceof Picture){
+            Picture picture = (Picture) obj;
+            equal = this.getImageURL().equals(picture.getImageURL());
+        }
+        return equal;
+    }
 }

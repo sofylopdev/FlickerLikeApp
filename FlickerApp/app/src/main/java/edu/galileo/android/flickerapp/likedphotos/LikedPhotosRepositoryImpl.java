@@ -8,7 +8,7 @@ import edu.galileo.android.flickerapp.entities.Picture;
 import edu.galileo.android.flickerapp.libs.MyEventBus;
 import edu.galileo.android.flickerapp.likedphotos.events.PictureListEvent;
 
-public class LikedPhotosRepositoryImpl implements LikedPhotosRepository{
+public class LikedPhotosRepositoryImpl implements LikedPhotosRepository {
 
     private MyEventBus eventBus;
 
@@ -20,17 +20,18 @@ public class LikedPhotosRepositoryImpl implements LikedPhotosRepository{
     public void getPicturesFromDb() {
         FlowCursorList<Picture> storedPictures =
                 new FlowCursorList.Builder<Picture>(Picture.class)
-                .cacheModels(false)
-                .build();
-        if(storedPictures.isEmpty()){
+                        .cacheModels(false)
+                        .build();
+
+        if (storedPictures.isEmpty()) {
             post(PictureListEvent.NO_PICTURES_EVENT, null);
-        }else{
+        } else {
             post(PictureListEvent.HAS_PICTURES_EVENT, storedPictures.getAll());
         }
         storedPictures.close();
     }
 
-    private void post(int type, List<Picture> pictureList){
+    private void post(int type, List<Picture> pictureList) {
         PictureListEvent event = new PictureListEvent();
         event.setType(type);
         event.setPictureList(pictureList);
