@@ -1,6 +1,5 @@
 package edu.galileo.android.flickerapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -12,8 +11,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.galileo.android.flickerapp.entities.Picture;
 import edu.galileo.android.flickerapp.libs.ImageLoader;
+import edu.galileo.android.flickerapp.libs.di.LibsComponent;
 
 import static edu.galileo.android.flickerapp.likedphotos.ui.LikedPhotosActivity.PICTURE_EXTRA;
+import static edu.galileo.android.flickerapp.likedphotos.ui.LikedPhotosActivity.TITLE_EXTRA;
 
 public class PictureDetailsActivity extends AppCompatActivity {
 
@@ -25,6 +26,7 @@ public class PictureDetailsActivity extends AppCompatActivity {
     private Picture picture;
 
     private ImageLoader imageLoader;
+    private LibsComponent component;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +34,27 @@ public class PictureDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_picture_details);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         setupInjection();
 
-        Intent intent = getIntent();
-        picture = (Picture) intent.getSerializableExtra(PICTURE_EXTRA);
-
-        pictureTitle.setText(picture.getTitle());
-        if (imageLoader != null)
-            imageLoader.load(pictureView, picture.getImageURL());
+        if (getIntent() != null) {
+           // picture = (Picture) getIntent().getSerializableExtra(PICTURE_EXTRA);
+            String title = getIntent().getStringExtra(TITLE_EXTRA);
+            String imageURL = getIntent().getStringExtra(PICTURE_EXTRA);
+            pictureTitle.setText(title);
+            imageLoader.load(pictureView, imageURL);
+        }else {
+            pictureTitle.setText(picture.getTitle());
+            if (imageLoader != null)
+                imageLoader.load(pictureView, picture.getImageURL());
+        }
     }
 
     private void setupInjection() {
         FlickerLikeApp app = (FlickerLikeApp) getApplication();
-        imageLoader = app.getLibsComponent(this).getImageLoader();
+        component = app.getLibsComponent(this);
+        imageLoader = getImageLoader();
+        picture = getPicture();
     }
 
     @Override
@@ -60,5 +70,13 @@ public class PictureDetailsActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public ImageLoader getImageLoader() {
+        return component.getImageLoader();
     }
 }
